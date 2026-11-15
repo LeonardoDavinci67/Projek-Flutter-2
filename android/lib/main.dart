@@ -1,28 +1,26 @@
-
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+
+import 'screens/main_screen.dart';
+import 'theme/app_colors.dart';
 
 void main() {
-  runApp(const TomoroApp());
+  runApp(const AmazonApp());
 }
 
-class TomoroApp extends StatelessWidget {
-  const TomoroApp({super.key});
+class AmazonApp extends StatelessWidget {
+  const AmazonApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Amazon Replica',
       debugShowCheckedModeBanner: false,
-      title: 'TOMORO COFFEE',
       theme: ThemeData(
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.teal),
         scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Roboto',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFF15A24),
-        ),
       ),
-      home: const HomePage(),
+      home: const MainScreen(),
     );
   }
 }
