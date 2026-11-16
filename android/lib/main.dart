@@ -13,7 +13,7 @@ class AmazonApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Amazon Replica',
+      title: 'Amazon',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
