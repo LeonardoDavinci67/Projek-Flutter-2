@@ -63,21 +63,34 @@ class _ProductListScreenState extends State<ProductListScreen> {
           ),
           Expanded(
             child: results.isEmpty
-                ? const Center(
-                    child: Text('Belum ada produk yang cocok.'),
-                  )
-                : GridView.builder(
-                    padding: const EdgeInsets.all(8),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.58,
-                    ),
-                    itemCount: results.length,
-                    itemBuilder: (context, index) {
-                      final product = results[index];
-                      return ProductCard(
-                        product: product,
-                        onAddToCart: () => widget.onAddToCart(product),
+                ? const Center(child: Text('Belum ada produk yang cocok.'))
+                : LayoutBuilder(
+                    builder: (context, constraints) {
+                      final crossAxisCount = constraints.maxWidth >= 900
+                          ? 4
+                          : constraints.maxWidth >= 560
+                          ? 3
+                          : 2;
+                      final childAspectRatio = crossAxisCount == 4
+                          ? 0.78
+                          : crossAxisCount == 3
+                          ? 0.72
+                          : 0.62;
+
+                      return GridView.builder(
+                        padding: const EdgeInsets.all(8),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          childAspectRatio: childAspectRatio,
+                        ),
+                        itemCount: results.length,
+                        itemBuilder: (context, index) {
+                          final product = results[index];
+                          return ProductCard(
+                            product: product,
+                            onAddToCart: () => widget.onAddToCart(product),
+                          );
+                        },
                       );
                     },
                   ),

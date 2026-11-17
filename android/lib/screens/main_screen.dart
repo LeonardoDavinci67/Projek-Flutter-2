@@ -85,46 +85,108 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
-      // IndexedStack menjaga posisi scroll & state tiap tab saat berpindah
-      body: IndexedStack(index: _currentIndex, children: pages),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _goToTab,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: AppColors.teal,
-        unselectedItemColor: Colors.black87,
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, size: 30),
-            activeIcon: Icon(Icons.home, size: 30),
-            label: 'Home',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline, size: 30),
-            activeIcon: Icon(Icons.person, size: 30),
-            label: 'Account',
-          ),
-          BottomNavigationBarItem(
-            icon: Badge(
-              label: Text('$_cartCount'),
-              isLabelVisible: _cartCount > 0,
-              child: const Icon(Icons.shopping_cart_outlined, size: 30),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final useNavigationRail = constraints.maxWidth >= 700;
+          final content = Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              // IndexedStack menjaga posisi scroll & state tiap tab saat berpindah.
+              child: IndexedStack(index: _currentIndex, children: pages),
             ),
-            activeIcon: Badge(
-              label: Text('$_cartCount'),
-              isLabelVisible: _cartCount > 0,
-              child: const Icon(Icons.shopping_cart, size: 30),
-            ),
-            label: 'Cart',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.menu, size: 30),
-            label: 'Menu',
-          ),
-        ],
+          );
+
+          if (!useNavigationRail) return content;
+
+          return Row(
+            children: [
+              NavigationRail(
+                selectedIndex: _currentIndex,
+                onDestinationSelected: _goToTab,
+                labelType: NavigationRailLabelType.all,
+                backgroundColor: Colors.white,
+                indicatorColor: AppColors.teal.withAlpha(30),
+                selectedIconTheme: const IconThemeData(color: AppColors.teal),
+                unselectedIconTheme: const IconThemeData(color: Colors.black87),
+                destinations: [
+                  const NavigationRailDestination(
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home),
+                    label: Text('Home'),
+                  ),
+                  const NavigationRailDestination(
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person),
+                    label: Text('Account'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Badge(
+                      label: Text('$_cartCount'),
+                      isLabelVisible: _cartCount > 0,
+                      child: const Icon(Icons.shopping_cart_outlined),
+                    ),
+                    selectedIcon: Badge(
+                      label: Text('$_cartCount'),
+                      isLabelVisible: _cartCount > 0,
+                      child: const Icon(Icons.shopping_cart),
+                    ),
+                    label: const Text('Cart'),
+                  ),
+                  const NavigationRailDestination(
+                    icon: Icon(Icons.menu),
+                    label: Text('Menu'),
+                  ),
+                ],
+              ),
+              const VerticalDivider(width: 1),
+              Expanded(child: content),
+            ],
+          );
+        },
+      ),
+      bottomNavigationBar: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth >= 700) return const SizedBox.shrink();
+          return BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: _goToTab,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            selectedItemColor: AppColors.teal,
+            unselectedItemColor: Colors.black87,
+            items: [
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined, size: 30),
+                activeIcon: Icon(Icons.home, size: 30),
+                label: 'Home',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline, size: 30),
+                activeIcon: Icon(Icons.person, size: 30),
+                label: 'Account',
+              ),
+              BottomNavigationBarItem(
+                icon: Badge(
+                  label: Text('$_cartCount'),
+                  isLabelVisible: _cartCount > 0,
+                  child: const Icon(Icons.shopping_cart_outlined, size: 30),
+                ),
+                activeIcon: Badge(
+                  label: Text('$_cartCount'),
+                  isLabelVisible: _cartCount > 0,
+                  child: const Icon(Icons.shopping_cart, size: 30),
+                ),
+                label: 'Cart',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.menu, size: 30),
+                label: 'Menu',
+              ),
+            ],
+          );
+        },
       ),
     );
   }

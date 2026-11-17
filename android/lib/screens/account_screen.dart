@@ -85,34 +85,44 @@ class _AccountScreenState extends State<AccountScreen> {
             padding: const EdgeInsets.all(16),
             children: [
               // ---------- Sapaan + ikon ----------
-              Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.grey,
-                    child: Icon(Icons.person, color: Colors.white),
-                  ),
-                  const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: _changeName,
-                    child: Row(
-                      children: [
-                        Text('Hello, $_name', style: const TextStyle(fontSize: 18)),
-                        const Icon(Icons.expand_more),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    icon: const Icon(Icons.settings_outlined),
-                    onPressed: () => _showMessage('Pengaturan belum tersedia'),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.notifications_none),
-                    onPressed: () => _showMessage('Tidak ada notifikasi baru'),
-                  ),
-                  const Text('🇺🇸 EN', style: TextStyle(fontSize: 16)),
-                ],
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.grey,
+                        child: Icon(Icons.person, color: Colors.white),
+                      ),
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: _changeName,
+                        child: Row(
+                          children: [
+                            Text(
+                              'Hello, $_name',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            const Icon(Icons.expand_more),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.settings_outlined),
+                        onPressed: () =>
+                            _showMessage('Pengaturan belum tersedia'),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.notifications_none),
+                        onPressed: () =>
+                            _showMessage('Tidak ada notifikasi baru'),
+                      ),
+                      if (constraints.maxWidth >= 320)
+                        const Text('🇺🇸 EN', style: TextStyle(fontSize: 16)),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 12),
 

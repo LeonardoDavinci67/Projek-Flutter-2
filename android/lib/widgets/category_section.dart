@@ -31,35 +31,49 @@ class CategorySection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true, // supaya grid mengikuti tinggi isinya
-            physics: const NeverScrollableScrollPhysics(), // scroll ikut halaman
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 0.95,
-            children: data.items.map((item) {
-              return GestureDetector(
-                onTap: () => onItemTap(item.label),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: item.color,
-                          borderRadius: BorderRadius.circular(18),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final crossAxisCount = constraints.maxWidth >= 900
+                  ? 4
+                  : constraints.maxWidth >= 560
+                  ? 3
+                  : 2;
+
+              return GridView.count(
+                crossAxisCount: crossAxisCount,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 0.95,
+                children: data.items.map((item) {
+                  return GestureDetector(
+                    onTap: () => onItemTap(item.label),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: item.color,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: Icon(
+                              item.icon,
+                              size: 80,
+                              color: item.accent,
+                            ),
+                          ),
                         ),
-                        child: Icon(item.icon, size: 80, color: item.accent),
-                      ),
+                        const SizedBox(height: 6),
+                        Text(item.label, style: const TextStyle(fontSize: 16)),
+                      ],
                     ),
-                    const SizedBox(height: 6),
-                    Text(item.label, style: const TextStyle(fontSize: 16)),
-                  ],
-                ),
+                  );
+                }).toList(),
               );
-            }).toList(),
+            },
           ),
         ],
       ),
