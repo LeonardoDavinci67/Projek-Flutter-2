@@ -137,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 400,
                   child: PageView.builder(
+                    key: const PageStorageKey<String>('home-promo-carousel'),
                     controller: _pageController,
                     itemCount: bigPromos.length,
                     onPageChanged: (index) =>
