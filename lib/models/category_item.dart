@@ -6,12 +6,14 @@ class CategoryItem {
   final IconData icon;
   final Color color;
   final Color accent;
+  final String imagePath;
 
   const CategoryItem({
     required this.label,
     required this.icon,
     required this.color,
     required this.accent,
+    required this.imagePath,
   });
 }
 

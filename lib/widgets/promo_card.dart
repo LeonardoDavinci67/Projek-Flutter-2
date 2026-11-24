@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/promo.dart';
 
-/// Kartu promo berwarna dengan judul tebal dan ikon besar.
+/// Kartu promo dengan judul tebal dan gambar kategori.
 /// [small] = true untuk versi kecil di baris horizontal.
 class PromoCard extends StatelessWidget {
   final Promo promo;
@@ -41,11 +41,7 @@ class PromoCard extends StatelessWidget {
             ),
             Expanded(
               child: Center(
-                child: Icon(
-                  promo.icon,
-                  size: small ? 64 : 150,
-                  color: promo.accent,
-                ),
+                child: Image.asset(promo.imagePath, fit: BoxFit.contain),
               ),
             ),
           ],

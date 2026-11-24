@@ -26,18 +26,23 @@ class ProductCard extends StatelessWidget {
           Container(
             height: 110,
             width: double.infinity,
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: product.color,
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Icon(product.icon, size: 56, color: Colors.black54),
+            child: Image.asset(product.imagePath, fit: BoxFit.contain),
           ),
           const SizedBox(height: 8),
           Text(
             product.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 14, height: 1.2, color: AppColors.link),
+            style: const TextStyle(
+              fontSize: 14,
+              height: 1.2,
+              color: AppColors.link,
+            ),
           ),
           const SizedBox(height: 4),
           RatingStars(rating: product.rating, reviews: product.reviews),

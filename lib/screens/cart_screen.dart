@@ -34,8 +34,7 @@ class _CartScreenState extends State<CartScreen> {
   double get _subtotal =>
       widget.cart.fold(0.0, (sum, item) => sum + item.total);
 
-  int get _itemCount =>
-      widget.cart.fold(0, (sum, item) => sum + item.quantity);
+  int get _itemCount => widget.cart.fold(0, (sum, item) => sum + item.quantity);
 
   /// Dialog konfirmasi checkout.
   void _checkout() {
@@ -57,7 +56,9 @@ class _CartScreenState extends State<CartScreen> {
                 Navigator.pop(dialogContext);
                 widget.onCheckout();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Pesanan berhasil dibuat (simulasi)')),
+                  const SnackBar(
+                    content: Text('Pesanan berhasil dibuat (simulasi)'),
+                  ),
                 );
               },
               child: const Text('Pesan'),
@@ -82,7 +83,11 @@ class _CartScreenState extends State<CartScreen> {
               color: Color(0xFFE3F1FA),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.shopping_cart, size: 50, color: AppColors.yellow),
+            child: const Icon(
+              Icons.shopping_cart,
+              size: 50,
+              color: AppColors.yellow,
+            ),
           ),
           const SizedBox(width: 16),
           const Expanded(
@@ -94,7 +99,10 @@ class _CartScreenState extends State<CartScreen> {
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
                 ),
                 SizedBox(height: 4),
-                Text('Echo... Echo...', style: TextStyle(fontSize: 18, color: Colors.black54)),
+                Text(
+                  'Echo... Echo...',
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                ),
                 SizedBox(height: 8),
                 Text(
                   'Pick up where you left off',
@@ -136,7 +144,10 @@ class _CartScreenState extends State<CartScreen> {
                   _primeActive
                       ? 'Free trial Prime aktif. Selamat berbelanja!'
                       : 'Fast, FREE delivery on eligible items with a 30-day trial for \$0',
-                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -212,11 +223,12 @@ class _CartScreenState extends State<CartScreen> {
           Container(
             width: 90,
             height: 90,
+            padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               color: item.product.color,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(item.product.icon, size: 44, color: Colors.black54),
+            child: Image.asset(item.product.imagePath, fit: BoxFit.contain),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -232,7 +244,10 @@ class _CartScreenState extends State<CartScreen> {
                 const SizedBox(height: 4),
                 Text(
                   '\$${item.product.price.toStringAsFixed(2)}',
-                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Row(
@@ -250,14 +265,19 @@ class _CartScreenState extends State<CartScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(6),
                               child: Icon(
-                                item.quantity == 1 ? Icons.delete_outline : Icons.remove,
+                                item.quantity == 1
+                                    ? Icons.delete_outline
+                                    : Icons.remove,
                                 size: 20,
                               ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text('${item.quantity}', style: const TextStyle(fontSize: 16)),
+                            child: Text(
+                              '${item.quantity}',
+                              style: const TextStyle(fontSize: 16),
+                            ),
                           ),
                           InkWell(
                             onTap: () => widget.onChangeQuantity(item, 1),

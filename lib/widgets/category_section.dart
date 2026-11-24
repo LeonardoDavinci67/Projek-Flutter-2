@@ -25,7 +25,10 @@ class CategorySection extends StatelessWidget {
             children: [
               Text(
                 data.title,
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               const Icon(Icons.chevron_right, size: 30),
             ],
@@ -59,10 +62,12 @@ class CategorySection extends StatelessWidget {
                               color: item.color,
                               borderRadius: BorderRadius.circular(18),
                             ),
-                            child: Icon(
-                              item.icon,
-                              size: 80,
-                              color: item.accent,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Image.asset(
+                                item.imagePath,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),

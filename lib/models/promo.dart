@@ -7,6 +7,7 @@ class Promo {
   final Color accent; // warna ikon
   final Color textColor;
   final IconData icon;
+  final String imagePath;
   final String? category; // kategori produk yang dibuka saat kartu diketuk
 
   const Promo({
@@ -14,6 +15,7 @@ class Promo {
     required this.color,
     required this.accent,
     required this.icon,
+    required this.imagePath,
     this.textColor = Colors.black,
     this.category,
   });
