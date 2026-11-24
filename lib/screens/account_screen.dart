@@ -11,7 +11,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  String _name = 'Adib';
+  String _name = 'Si Suki Liar';
   int _selectedChip = -1; // -1 = belum ada chip yang dipilih
   final List<String> _interests = [];
   final List<String> _lists = [];
@@ -38,7 +38,8 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const Text('Batal'),
             ),
             TextButton(
-              onPressed: () => Navigator.pop(dialogContext, controller.text.trim()),
+              onPressed: () =>
+                  Navigator.pop(dialogContext, controller.text.trim()),
               child: const Text('Simpan'),
             ),
           ],
@@ -55,14 +56,20 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> _addInterest() async {
-    final result = await _askText('Create a new Interest', 'Contoh: Photography');
+    final result = await _askText(
+      'Create a new Interest',
+      'Contoh: Photography',
+    );
     if (result != null && result.isNotEmpty) {
       setState(() => _interests.add(result));
     }
   }
 
   Future<void> _addList() async {
-    final result = await _askText('Create a List', 'Nama daftar, contoh: Wishlist');
+    final result = await _askText(
+      'Create a List',
+      'Nama daftar, contoh: Wishlist',
+    );
     if (result != null && result.isNotEmpty) {
       setState(() => _lists.add(result));
     }
@@ -217,14 +224,20 @@ class _AccountSection extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               const Icon(Icons.arrow_forward, size: 28),
             ],
           ),
           const SizedBox(height: 8),
           if (items.isEmpty)
-            Text(emptyText, style: const TextStyle(fontSize: 17, color: Colors.black54))
+            Text(
+              emptyText,
+              style: const TextStyle(fontSize: 17, color: Colors.black54),
+            )
           else
             Wrap(
               spacing: 8,
@@ -238,9 +251,14 @@ class _AccountSection extends StatelessWidget {
               onPressed: onPressed,
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 18,
+                ),
                 side: const BorderSide(color: Colors.black26),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               child: Text(buttonText, style: const TextStyle(fontSize: 18)),
             ),
