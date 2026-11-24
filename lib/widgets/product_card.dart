@@ -4,7 +4,7 @@ import '../models/product.dart';
 import '../theme/app_colors.dart';
 import 'rating_stars.dart';
 
-/// Kartu produk: "gambar" (ikon), nama, rating, harga, dan tombol Add to cart.
+/// Kartu produk: gambar, nama, rating, harga, dan tombol Add to cart.
 class ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback onAddToCart;
@@ -26,12 +26,17 @@ class ProductCard extends StatelessWidget {
           Container(
             height: 110,
             width: double.infinity,
-            padding: const EdgeInsets.all(8),
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               color: product.color,
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Image.asset(product.imagePath, fit: BoxFit.contain),
+            child: Image.asset(
+              product.imagePath,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(height: 8),
           Text(

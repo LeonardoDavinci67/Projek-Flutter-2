@@ -223,12 +223,17 @@ class _CartScreenState extends State<CartScreen> {
           Container(
             width: 90,
             height: 90,
-            padding: const EdgeInsets.all(6),
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               color: item.product.color,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Image.asset(item.product.imagePath, fit: BoxFit.contain),
+            child: Image.asset(
+              item.product.imagePath,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(

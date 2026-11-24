@@ -58,16 +58,16 @@ class CategorySection extends StatelessWidget {
                         Expanded(
                           child: Container(
                             width: double.infinity,
+                            clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
                               color: item.color,
                               borderRadius: BorderRadius.circular(18),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Image.asset(
-                                item.imagePath,
-                                fit: BoxFit.contain,
-                              ),
+                            child: Image.asset(
+                              item.imagePath,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),

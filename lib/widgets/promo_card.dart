@@ -23,6 +23,7 @@ class PromoCard extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: small ? 0 : 6),
         padding: EdgeInsets.all(small ? 14 : 20),
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: promo.color,
           borderRadius: BorderRadius.circular(small ? 20 : 26),
@@ -40,8 +41,11 @@ class PromoCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Center(
-                child: Image.asset(promo.imagePath, fit: BoxFit.contain),
+              child: Image.asset(
+                promo.imagePath,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
           ],
